@@ -2,14 +2,18 @@
   "name": "frp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "test": "mocha --compilers coffee:coffee-script/register 'src/**/_spec/*.coffee'",
-    "watch": "mocha --watch --compilers coffee:coffee-script/register 'src/**/_spec/*.coffee'"
+    "watch": "mocha --watch --compilers coffee:coffee-script/register 'src/**/_spec/*.coffee'",
+    "build": "coffee -c -o build src/*"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "coffee-script": "^1.10.0"
+  },
+  "devDependencies": {
+    "sinon": "^1.17.2"
   }
 }

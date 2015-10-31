@@ -1,4 +1,5 @@
 cache = require './signalCache'
+apply = require './apply'
 signal = module.exports = (initialValue, dependencies...) ->
   listeners = []
   _value = null # either a specific value or a transform function
@@ -16,7 +17,7 @@ signal = module.exports = (initialValue, dependencies...) ->
 
   read = () ->
     if typeof _value == 'function'
-      _value(dependencies.map((s) -> s())...)
+      apply _value, dependencies
     else
       _value
 

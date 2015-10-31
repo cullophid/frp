@@ -1,11 +1,6 @@
+apply = require './apply'
 observable = module.exports = (f, signals...) ->
-  exec = () ->
-    args = signals
-      .map((s) -> s())
-      .filter((x) -> x != undefined)
-
-    f(args...) if args.length > 0
-
+  exec = () -> apply(f, signals) 
   s.addListener(exec) for s in signals
 
   exec()
