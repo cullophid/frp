@@ -5,6 +5,6 @@ module.exports = (f) ->
       cache = f(args...)
     cache
 
-  get.clearCache = () -> cache = undefined
-
+  get.clearCache = () ->
+    cache = undefined
   get
