@@ -1,10 +1,11 @@
-S = require 'sanctuary'
+{apply} = require './src/helpers'
+dependencies = [
+  () -> 1,
+  () -> Promise.resolve(2),
+  () -> 3
+];
 
-maybe5 = S.Maybe.of(5)
+console.log 1
+apply ((x) -> console.log x), dependencies
 
-
-f = (value) ->
-  S.Left value + 2
-
-
-console.log maybe5.chain(f)
+console.log 2

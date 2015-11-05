@@ -1,12 +1,19 @@
-
 # Generic factory for creating new Signal types
-signalFactory = module.exports = (_read, _write, _init) ->
+signalFactory = module.exports = (_read, _write) ->
   _listeners = []
   _value = null # either a specific value or a transform function
   _isDirty = false
+  _name = null
   _dependencies = []
   _cache = null
+
+  # single function interface for the signal
+  getSet = (state) -> (value) ->
+    if value? then state.write value else state.read().extract()
+
   state =
+    setName: (name) -> _name = name
+    getName: () -> _name
     emit: () ->
       _isDirty = true
       l() for l in _listeners
@@ -35,4 +42,4 @@ signalFactory = module.exports = (_read, _write, _init) ->
 
       _dependencies = dependencies
 
-  _init state
+  Object.assign getSet(state), state

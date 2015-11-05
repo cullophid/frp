@@ -1,5 +1,6 @@
+curryN = require './helpers/curryN'
+Maybe = require './helpers/Maybe'
 signalFactory = require './signalFactory'
-Maybe = require './Maybe'
 empty = require './empty'
 
 _read = (filter, cache, isDirty, dependencies) ->
@@ -23,4 +24,8 @@ _init = (state) ->
     Object.assign f, state
 
 
-module.exports = signalFactory _read, _write, _init
+module.exports = curryN 2, (initialValue, dependencies...) ->
+  signal = signalFactory _read, _write
+  signal.write initialValue
+  signal.setDependencies dependencies
+  signal

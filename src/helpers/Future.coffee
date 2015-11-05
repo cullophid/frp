@@ -1,5 +1,5 @@
 Identity = require './Identity'
-{isPromise} = require './helpers'
+isPromise = require './isPromise'
 Future = {
   of: (_value) ->
     if isPromise _value
